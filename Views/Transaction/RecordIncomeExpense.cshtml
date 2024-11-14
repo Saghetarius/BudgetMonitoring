@@ -8,10 +8,7 @@
     <h2 class="text-center text-dark mb-4">Учет расходов и доходов</h2>
 
     <form asp-action="RecordIncomeExpense" method="post">
-        <!-- Отображение ошибок валидации -->
         <div asp-validation-summary="All" class="alert alert-danger mb-3" style="display: @(ViewData.ModelState.IsValid ? "none" : "block")"></div>
-
-        <!-- Скрытое поле для UserId -->
         <input asp-for="UserId" type="hidden" />
 
         <!-- Сумма дохода -->

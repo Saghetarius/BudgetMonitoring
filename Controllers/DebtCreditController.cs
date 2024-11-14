@@ -59,7 +59,7 @@ namespace BudgetMonitoring.Controllers
             var debtCredit = new DebtCredit
             {
                 Amount = amount,
-                InterestRate = isDebt ? 0 : interestRate,  // если долг, процент не нужен
+                InterestRate = isDebt ? 0 : interestRate,  
                 DueDate = dueDate,
                 IsDebt = isDebt,
                 UserId = user.Id,
@@ -117,7 +117,6 @@ namespace BudgetMonitoring.Controllers
         // Логика для расчета графика погашения кредита с аннуитетными платежами
         private List<PaymentScheduleModel> CalculateLoanSchedule(decimal loanAmount, decimal interestRate, DateTime dueDate)
         {
-            // Пример расчета аннуитетного платежа
             decimal monthlyInterestRate = interestRate / 100 / 12;
             int totalMonths = (dueDate.Year - DateTime.Now.Year) * 12 + dueDate.Month - DateTime.Now.Month;
             decimal monthlyPayment = loanAmount * (monthlyInterestRate * (decimal)Math.Pow(1 + (double)monthlyInterestRate, totalMonths)) /
@@ -126,7 +125,7 @@ namespace BudgetMonitoring.Controllers
             var schedule = new List<PaymentScheduleModel>();
             var paymentDate = DateTime.Now;
 
-            for (int i = 1; i <= totalMonths; i++) // Используем общее количество месяцев до даты погашения
+            for (int i = 1; i <= totalMonths; i++) 
             {
                 paymentDate = paymentDate.AddMonths(1);
                 schedule.Add(new PaymentScheduleModel

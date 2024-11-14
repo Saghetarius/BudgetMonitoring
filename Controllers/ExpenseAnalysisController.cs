@@ -22,18 +22,16 @@ namespace BudgetMonitoring.Controllers
         // Страница для анализа расходов
         public async Task<IActionResult> Analysis()
         {
-            var user = await _userManager.GetUserAsync(User); // Получаем текущего пользователя
+            var user = await _userManager.GetUserAsync(User); 
             if (user == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            // Загружаем данные для текущего и прошлого месяца, а также для годового отчета
             var currentMonth = DateTime.Now.Month;
             var previousMonth = currentMonth == 1 ? 12 : currentMonth - 1;
             var currentYear = DateTime.Now.Year;
 
-            // Проверка наличия данных для текущего месяца
             var currentMonthExpenses = _context.BudgetStatusModels
                 .Where(b => b.UserId == user.Id && b.TransactionDate.Month == currentMonth && b.TransactionDate.Year == currentYear)
                 .ToList();
@@ -41,7 +39,6 @@ namespace BudgetMonitoring.Controllers
                 .Where(b => b.UserId == user.Id && b.TransactionDate.Month == previousMonth && b.TransactionDate.Year == currentYear)
                 .ToList();
 
-            // Выводим диагностическую информацию, если данные отсутствуют
             if (!currentMonthExpenses.Any())
             {
                 Console.WriteLine("Нет данных для текущего месяца");
@@ -51,7 +48,6 @@ namespace BudgetMonitoring.Controllers
                 Console.WriteLine("Нет данных для предыдущего месяца");
             }
 
-            // Подготовка данных для отчета
             var expenseAnalysisModel = new ExpenseAnalysisModel
             {
                 CurrentMonthIncome = currentMonthExpenses.Where(e => e.IncomeAmount > 0).Sum(e => e.IncomeAmount),
@@ -90,7 +86,7 @@ namespace BudgetMonitoring.Controllers
                     }).ToList()
             };
 
-            return View(expenseAnalysisModel);  // Передаем модель в представление
+            return View(expenseAnalysisModel);  
         }
 
 

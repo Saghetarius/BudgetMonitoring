@@ -23,9 +23,8 @@
                     <input type="number" class="form-control" id="TargetAmount" name="TargetAmount" required placeholder="Укажите целевую сумму" min="1" />
                 </div>
 
-                <!-- Скрытые поля для UserId, IsCompleted и BudgetStatusModelId -->
-                <input type="hidden" name="UserId" value="@User.Identity.Name" /> <!-- Получаем UserId из текущего пользователя -->
-                <input type="hidden" name="IsCompleted" value="false" /> <!-- Цель еще не завершена -->
+                <input type="hidden" name="UserId" value="@User.Identity.Name" /> 
+                <input type="hidden" name="IsCompleted" value="false" /> 
 
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-secondary btn-lg">

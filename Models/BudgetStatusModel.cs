@@ -22,13 +22,13 @@ namespace BudgetMonitoring.Models
         public decimal ExpenseAmount { get; set; }
         public DateTime TransactionDate { get; set; }
         public string Category { get; set; }
-        public bool Save10Percent { get; set; }  // Флаг для перевода 10% на сберегательный счёт
-        public decimal SavingsAmount { get; set; }  // Сумма, переведенная на сберегательный счет
-        public decimal SavingsAccount { get; set; }  // Сберегательный счет
+        public bool Save10Percent { get; set; }  
+        public decimal SavingsAmount { get; set; }  
+        public decimal SavingsAccount { get; set; }  
         public string UserId { get; set; }
 
         // Добавленные свойства для целей
-        public List<Goal> Goals { get; set; } = new List<Goal>(); // Список целей
+        public List<Goal> Goals { get; set; } = new List<Goal>(); 
     }
 
 
@@ -45,20 +45,20 @@ namespace BudgetMonitoring.Models
 
     public class GoalViewModel
     {
-        public List<Goal> ActiveGoals { get; set; } // Список активных целей
-        public List<Goal> CompletedGoals { get; set; } // Список завершенных целей
+        public List<Goal> ActiveGoals { get; set; } 
+        public List<Goal> CompletedGoals { get; set; } 
         public Goal Goal { get; set; }
     }
 
     public class DebtCredit
     {
         public int Id { get; set; }
-        public decimal Amount { get; set; }  // Сумма долга или кредита
-        public decimal InterestRate { get; set; }  // Процент для кредита, 0 для долга
-        public DateTime DueDate { get; set; }  // Дата платежа (только для кредита)
-        public string UserId { get; set; }  // Идентификатор пользователя
-        public bool IsDebt { get; set; }  // Истинно для долга, ложно для кредита
-        public bool IsPaid { get; set; }  // Погашен ли долг/кредит
+        public decimal Amount { get; set; }  
+        public decimal InterestRate { get; set; }  
+        public DateTime DueDate { get; set; }  
+        public string UserId { get; set; }  
+        public bool IsDebt { get; set; }  
+        public bool IsPaid { get; set; } 
     }
     namespace BudgetMonitoring.Models
     {

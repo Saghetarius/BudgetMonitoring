@@ -29,22 +29,22 @@ public class BudgetStatusController : Controller
         // Получаем все записи по бюджету для пользователя
         var budgetData = _context.BudgetStatus
             .Where(b => b.UserId == user.Id)
-            .OrderBy(b => b.TransactionDate) // Сортируем по дате
-            .ToList(); // Получаем все записи
+            .OrderBy(b => b.TransactionDate) 
+            .ToList(); 
 
         // Получаем данные о расходах
-        var totalBudget = budgetData.Sum(b => b.TotalBudget); // Сумма всех записей по бюджету
+        var totalBudget = budgetData.Sum(b => b.TotalBudget); 
 
         // Расходы за текущий месяц
         var currentMonth = DateTime.Now.Month;
         var monthlyExpenses = budgetData
             .Where(t => t.TransactionDate.Month == currentMonth)
-            .Sum(t => t.ExpenseAmount); // Сумма расходов за текущий месяц
+            .Sum(t => t.ExpenseAmount); 
 
         // Получаем данные о годовых расходах
         var annualExpenses = budgetData
-            .Where(t => t.TransactionDate.Year <= DateTime.Now.Year) // Получаем расходы за все годы
-            .Sum(t => t.ExpenseAmount); // Сумма всех расходов
+            .Where(t => t.TransactionDate.Year <= DateTime.Now.Year) 
+            .Sum(t => t.ExpenseAmount); 
 
         // Получаем данные о долгах и кредитах
         var totalDebts = await _context.DebtCredits

@@ -45,14 +45,13 @@ namespace BudgetMonitoring.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // Устанавливаем TotalBudget в 0 и отнимаем сумму расходов
             var transaction = new BudgetStatusModel
             {
                 UserId = user.Id,
                 ExpenseAmount = amount,
                 Category = category,
                 TransactionDate = DateTime.Now,
-                TotalBudget = 0 - amount  // Вычитаем сумму расходов
+                TotalBudget = 0 - amount  
             };
 
             _context.BudgetStatusModels.Add(transaction);
@@ -70,14 +69,13 @@ namespace BudgetMonitoring.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // Устанавливаем TotalBudget в 0 и отнимаем сумму инвестиций
             var investment = new BudgetStatusModel
             {
                 UserId = user.Id,
                 AnnualInvestments = amount,
                 Category = $"Инвестиция: {company}",
                 TransactionDate = DateTime.Now,
-                TotalBudget = 0 - amount  // Вычитаем сумму инвестиций
+                TotalBudget = 0 - amount  
             };
 
             _context.BudgetStatusModels.Add(investment);

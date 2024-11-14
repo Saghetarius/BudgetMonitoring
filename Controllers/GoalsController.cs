@@ -22,7 +22,6 @@ namespace BudgetMonitoring.Controllers
         // Страница с активными и завершенными целями
         public async Task<IActionResult> Index()
         {
-            // Получаем текущего пользователя
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -53,22 +52,13 @@ namespace BudgetMonitoring.Controllers
         [HttpPost]
         public async Task<IActionResult> MarkAsCompleted(int id)
         {
-            // Находим цель по ID
             var goal = await _context.Goals.FindAsync(id);
-
-            // Если цель не найдена, возвращаем ошибку
             if (goal == null)
             {
-                return NotFound(); // Можно также вернуть сообщение об ошибке
+                return NotFound(); 
             }
-
-            // Обновляем статус цели на выполненную
             goal.IsCompleted = true;
-
-            // Сохраняем изменения в базе данных
             await _context.SaveChangesAsync();
-
-            // Перенаправляем обратно на страницу с индексом
             return RedirectToAction("Index");
         }
 
@@ -94,11 +84,10 @@ namespace BudgetMonitoring.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                goal.UserId = user.UserName;  // Устанавливаем UserId из текущего пользователя
-                goal.IsCompleted = false;     // Устанавливаем цель как не завершенную
-
-                goal.UserId = user.UserName;  // Устанавливаем UserId
-                goal.IsCompleted = false;     // Новая цель будет не завершена
+                goal.UserId = user.UserName;  
+                goal.IsCompleted = false;     
+                goal.UserId = user.UserName;  
+                goal.IsCompleted = false;     
 
                 _context.Goals.Add(goal);
                 await _context.SaveChangesAsync();

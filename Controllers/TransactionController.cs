@@ -9,7 +9,7 @@ namespace BudgetMonitoring.Controllers
     public class TransactionController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;  // Используем IdentityUser
+        private readonly UserManager<IdentityUser> _userManager; 
 
         public TransactionController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
@@ -20,10 +20,10 @@ namespace BudgetMonitoring.Controllers
         // Страница для ввода доходов и расходов
         public async Task<IActionResult> RecordIncomeExpense()
         {
-            var user = await _userManager.GetUserAsync(User); // Получаем текущего пользователя
+            var user = await _userManager.GetUserAsync(User); 
             var model = new BudgetStatusModel
             {
-                UserId = user?.Id // Присваиваем UserId
+                UserId = user?.Id 
             };
             return View(model);
         }
@@ -48,7 +48,7 @@ namespace BudgetMonitoring.Controllers
                     if (model.Save10Percent && model.IncomeAmount > 0)
                     {
                         model.SavingsAmount = model.IncomeAmount * 0.10M;
-                        model.SavingsAccount += model.SavingsAmount;  // Обновляем сберегательный счет
+                        model.SavingsAccount += model.SavingsAmount;  
                     }
 
                     // Обновляем бюджет
