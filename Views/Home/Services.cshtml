@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Services";
+}
+
+<h1 class="text-center mt-5">Services</h1>
+
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-4 mb-3">
+            <a href="/BudgetStatus" class="service-card">
+                <div class="service-card-content">Статус бюджета</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="/Debtcredit" class="service-card">
+                <div class="service-card-content">Управление долгами и кредитами</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="/ExpenseAnalysis/Analysis" class="service-card">
+                <div class="service-card-content">Анализ расходов и отчетность</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="/Goals" class="service-card">
+                <div class="service-card-content">Цели</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="/Integration" class="service-card">
+                <div class="service-card-content">Интеграции</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="/Transaction/RecordIncomeExpense" class="service-card">
+                <div class="service-card-content">Учет расходов и доходов</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Основные стили страницы */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    /* Карточки сервиса */
+    .service-card {
+        display: block;
+        text-decoration: none;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .service-card-content {
+        padding: 20px;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #007bff;
+    }
+
+    /* Эффекты при наведении */
+    .service-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+    }
+
+    /* Адаптивное оформление */
+    @@media (min-width: 768px) {
+        h1 {
+            font-size: 2.5rem;
+        }
+    }
+</style>

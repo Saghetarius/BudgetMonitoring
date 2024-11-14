@@ -1,0 +1,93 @@
+﻿@model IEnumerable<DebtCredit>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление долгами и кредитами</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            margin-bottom: 20px;
+        }
+
+        .alert-upcoming {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Управление долгами и кредитами</h2>
+
+        <!-- Кнопки для добавления долга и кредита -->
+        <div class="btn-group" role="group">
+            <a href="@Url.Action("AddDebt", "DebtCredit")" class="btn btn-primary">Добавить долг</a>
+            <a href="@Url.Action("AddCredit", "DebtCredit")" class="btn btn-secondary">Добавить кредит</a>
+        </div>
+
+        <h3>Ваши долги и кредиты</h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Сумма</th>
+                        <th scope="col">Процент</th>
+                        <th scope="col">Дата платежа</th>
+                        <th scope="col">Тип</th>
+                        <th scope="col">Действия</th>
+                        <th scope="col">Уведомление</th> <!-- Новый столбец для уведомлений -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var isUpcomingPayment = item.DueDate <= DateTime.Now.AddDays(7) && item.DueDate >= DateTime.Now;
+
+                        <tr>
+                            <td>@item.Amount.ToString("C")</td>
+                            <td>@item.InterestRate.ToString("0.#") %</td>
+                            <td>@item.DueDate.ToShortDateString()</td>
+                            <td>@(item.IsDebt ? "Долг" : "Кредит")</td>
+                            <td>
+                                <form asp-action="DeleteDebtCredit" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                                </form>
+                            </td>
+                            <td>
+                                @if (isUpcomingPayment)
+                                {
+                                    <span class="alert-upcoming">Платеж скоро!</span> <!-- Уведомление о ближайшем платеже -->
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

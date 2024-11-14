@@ -1,0 +1,127 @@
+﻿@model IntegrationViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container my-5">
+    <h2 class="text-center text-dark mb-4">Интеграции</h2>
+
+    <!-- Оплата коммунальных услуг -->
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-light text-dark">
+            <h3 class="card-title mb-0">Оплата коммунальных услуг</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="PayUtility" method="post">
+                <div class="mb-3">
+                    <label for="utilityCategory" class="form-label">Выберите категорию:</label>
+                    <select id="utilityCategory" name="category" class="form-select" required>
+                        @foreach (var category in Model.UtilityCategories)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Сумма:</label>
+                    <input type="number" name="amount" id="amount" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Оплатить</button>
+            </form>
+        </div>
+    </div>
+
+    <h4 class="text-center mb-3">Примерные цены на коммунальные услуги</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th>Категория</th>
+                    <th>Примерная цена</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Свет</td>
+                    <td>150.00</td>
+                </tr>
+                <tr>
+                    <td>Газ</td>
+                    <td>200.00</td>
+                </tr>
+                <tr>
+                    <td>Вода</td>
+                    <td>100.00</td>
+                </tr>
+                <tr>
+                    <td>Интернет</td>
+                    <td>500.00</td>
+                </tr>
+                <tr>
+                    <td>Отопление</td>
+                    <td>350.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Инвестиции -->
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-light text-dark">
+            <h3 class="card-title mb-0">Инвестиции</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="InvestInCompany" method="post">
+                <div class="mb-3">
+                    <label for="company" class="form-label">Выберите компанию:</label>
+                    <select id="company" name="company" class="form-select" required>
+                        @foreach (var company in Model.Companies)
+                        {
+                            <option value="@company">@company</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Сумма:</label>
+                    <input type="number" name="amount" id="amount" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-success">Инвестировать</button>
+            </form>
+        </div>
+    </div>
+
+    <h4 class="text-center mb-3">Примерные цены акций компаний</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th>Компания</th>
+                    <th>Стоимость акции</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Компания A</td>
+                    <td>120.50</td>
+                </tr>
+                <tr>
+                    <td>Компания B</td>
+                    <td>85.30</td>
+                </tr>
+                <tr>
+                    <td>Компания C</td>
+                    <td>200.75</td>
+                </tr>
+                <tr>
+                    <td>Компания D</td>
+                    <td>150.60</td>
+                </tr>
+                <tr>
+                    <td>Компания E</td>
+                    <td>175.90</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

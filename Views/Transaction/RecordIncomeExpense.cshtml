@@ -1,0 +1,64 @@
+﻿@model BudgetMonitoring.Models.BudgetStatusModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container my-5">
+    <h2 class="text-center text-dark mb-4">Учет расходов и доходов</h2>
+
+    <form asp-action="RecordIncomeExpense" method="post">
+        <!-- Отображение ошибок валидации -->
+        <div asp-validation-summary="All" class="alert alert-danger mb-3" style="display: @(ViewData.ModelState.IsValid ? "none" : "block")"></div>
+
+        <!-- Скрытое поле для UserId -->
+        <input asp-for="UserId" type="hidden" />
+
+        <!-- Сумма дохода -->
+        <div class="mb-3">
+            <label for="IncomeAmount" class="form-label">Сумма дохода:</label>
+            <input asp-for="IncomeAmount" type="number" step="0.01" class="form-control" />
+            <span asp-validation-for="IncomeAmount" class="text-danger"></span>
+        </div>
+
+        <!-- Сумма расхода -->
+        <div class="mb-3">
+            <label for="ExpenseAmount" class="form-label">Сумма расхода:</label>
+            <input asp-for="ExpenseAmount" type="number" step="0.01" class="form-control" />
+            <span asp-validation-for="ExpenseAmount" class="text-danger"></span>
+        </div>
+
+        <!-- Дата транзакции -->
+        <div class="mb-3">
+            <label for="TransactionDate" class="form-label">Дата транзакции:</label>
+            <input asp-for="TransactionDate" type="date" class="form-control" />
+            <span asp-validation-for="TransactionDate" class="text-danger"></span>
+        </div>
+
+        <!-- Категория -->
+        <div class="mb-3">
+            <label for="Category" class="form-label">Категория:</label>
+            <select asp-for="Category" class="form-select">
+                <option value="Зарплата">Зарплата</option>
+                <option value="Премия">Премия</option>
+                <option value="Подарок">Подарок</option>
+                <option value="Коммунальные платежи">Коммунальные платежи</option>
+                <option value="Прочее">Прочее</option>
+            </select>
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+
+        <!-- Перевод 10% на сберегательный счет -->
+        <div class="mb-3 form-check">
+            <input asp-for="Save10Percent" type="checkbox" class="form-check-input" id="Save10Percent" />
+            <label for="Save10Percent" class="form-check-label">Перевести 10% на сберегательный счет</label>
+            <span asp-validation-for="Save10Percent" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Сохранить</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
